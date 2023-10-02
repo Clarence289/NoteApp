@@ -11,7 +11,7 @@ const Home = () => {
   const saveNote = async()=>{
     const notesCollectionRef =  collection(db, 'notes');
 
-    const noteData = {
+    const noteAdd = {
         title,
         note,
         timestamp: new Date().toISOString(),
@@ -20,16 +20,17 @@ const Home = () => {
     try {
       
 
-      const noteRef = await addDoc(notesCollectionRef, noteData);
+      const noteRef = await addDoc(notesCollectionRef, orderData);
+
+      
 
       setNote('');
       setTitle('');
-      alert('Note saved successfully.');
+      console.log('Note saved successfully.');
       
     } catch (error) {
 
-      alert('Error saving note:', error);
-      
+      console.error('Error saving note:', error);
       
     }
   }

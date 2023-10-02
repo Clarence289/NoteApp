@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { TextInput, TouchableOpacity, View, Text, StyleSheet } from 'react-native';
 import { db } from '../config/firabase';
-import {  addDoc,collection } from 'firebase/firestore';
 
 const Home = () => {
 
@@ -9,27 +8,22 @@ const Home = () => {
   const [note, setNote] = useState('');
 
   const saveNote = async()=>{
-    const notesCollectionRef =  collection(db, 'notes');
+    try {
+      const noteRef =  db.collection('notes');
 
-    const noteData = {
+      await noteRef.add({
         title,
         note,
         timestamp: new Date().toISOString(),
-      }
-
-    try {
-      
-
-      const noteRef = await addDoc(notesCollectionRef, noteData);
+      });
 
       setNote('');
       setTitle('');
-      alert('Note saved successfully.');
+      console.log('Note saved successfully.');
       
     } catch (error) {
 
-      alert('Error saving note:', error);
-      
+      console.error('Error saving note:', error);
       
     }
   }

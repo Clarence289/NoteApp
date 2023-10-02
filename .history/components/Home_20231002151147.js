@@ -22,14 +22,15 @@ const Home = () => {
 
       const noteRef = await addDoc(notesCollectionRef, noteData);
 
+      
+
       setNote('');
       setTitle('');
       alert('Note saved successfully.');
       
     } catch (error) {
 
-      alert('Error saving note:', error);
-      
+      console.error('Error saving note:', error);
       
     }
   }
