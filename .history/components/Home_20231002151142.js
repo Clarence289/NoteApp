@@ -26,7 +26,7 @@ const Home = () => {
 
       setNote('');
       setTitle('');
-      alert('Note saved successfully.');
+      alert('Note saved successfully.')
       
     } catch (error) {
 
