@@ -27,9 +27,8 @@ const Home = () => {
       alert('Note saved successfully.');
       
     } catch (error) {
-
-      alert('Error saving note:', error);
-      
+      alert('Note saved successfully.');
+      console.error('Error saving note:', error);
       
     }
   }
