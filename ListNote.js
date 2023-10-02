@@ -45,10 +45,10 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   card: {
-    width: '80%', // Make the card occupy 80% of the screen width
-    height: 250, // Set the card height to 250 (adjust as needed)
+    width: '80%', 
+    height: 250, 
     marginBottom: 16,
-    alignSelf: 'center', // Center the card horizontally
+    alignSelf: 'center'
   },
   buttonContainer: {
     marginTop: 12,
@@ -57,10 +57,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   addButton: {
-    backgroundColor: 'blue', // Customize the button background color
+    backgroundColor: 'blue',
   },
   buttonLabel: {
-    color: 'white', // Customize the button text color
+    color: 'white', 
   },
 });
 
