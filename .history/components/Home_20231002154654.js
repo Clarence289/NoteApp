@@ -1,10 +1,39 @@
 import React, { useState } from 'react';
 import { TextInput, TouchableOpacity, View, Text, StyleSheet } from 'react-native';
-
-
+import { db } from '../config/firabase';
+import {  addDoc,collection } from 'firebase/firestore';
+import {nav}
 
 const Home = () => {
 
+  const [title, setTitle]= useState('');
+  const [note, setNote] = useState('');
+
+  const saveNote = async()=>{
+    const notesCollectionRef =  collection(db, 'notes');
+
+    const noteData = {
+        title,
+        note,
+        timestamp: new Date().toISOString(),
+      }
+
+    try {
+      
+
+      const noteRef = await addDoc(notesCollectionRef, noteData);
+
+      setNote('');
+      setTitle('');
+      alert('Note saved successfully.');
+      
+    } catch (error) {
+
+      alert('Error saving note:', error);
+      
+      
+    }
+  }
   return (
     <View style={styles.container}>
       <Text>Adding Note Screen</Text>

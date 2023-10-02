@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { TextInput, TouchableOpacity, View, Text, StyleSheet } from 'react-native';
-
+import { db } from '../config/firabase';
+import {  addDoc,collection } from 'firebase/firestore';
 
 
 const Home = () => {
