@@ -9,23 +9,23 @@ const Home = () => {
 
   return (
     <View style={styles.container}>
-    <Text>Adding Note Screen</Text>
-    <TextInput
-      style={styles.titleContainer}
-      placeholder="Title"
-      value={title}
-      onChangeText={(text) => setTitle(text)}
-    />
-    <TextInput
-      style={styles.noteContainer}
-      placeholder="Note"
-      value={note}
-      onChangeText={(text) => setNote(text)}
-    />
-    <TouchableOpacity style={styles.button} onPress={() => firebaseService.saveNote(title, note)}>
-      <Text style={styles.buttonText}>Save</Text>
-    </TouchableOpacity>
-  </View>
+      <Text>Adding Note Screen</Text>
+      <TextInput
+        style={styles.titleContainer}
+        placeholder="Title"
+        
+        onChangeText={(text) => setTitle(text)}
+      />
+      <TextInput
+        style={styles.noteContainer}
+        placeholder="Note"
+        
+        onChangeText={(text) => setNote(text)}
+      />
+      <TouchableOpacity style={styles.button} >
+        <Text style={styles.buttonText}>Save</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
