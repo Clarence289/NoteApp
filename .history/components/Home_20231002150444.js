@@ -9,20 +9,17 @@ const Home = () => {
   const [note, setNote] = useState('');
 
   const saveNote = async()=>{
-    const notesCollectionRef =  collection(db, 'notes');
+    
+    try {
+      const noteRef =  collection(db, 'notes');
 
-    const noteData = {
+      const docRef = await addDoc(ordersCollectionRef, orderData);
+
+      await noteRef.add({
         title,
         note,
         timestamp: new Date().toISOString(),
-      }
-
-    try {
-      
-
-      const noteRef = await addDoc(notesCollectionRef, noteData);
-
-      
+      });
 
       setNote('');
       setTitle('');

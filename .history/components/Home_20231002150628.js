@@ -11,7 +11,7 @@ const Home = () => {
   const saveNote = async()=>{
     const notesCollectionRef =  collection(db, 'notes');
 
-    const noteData = {
+    const note = {
         title,
         note,
         timestamp: new Date().toISOString(),

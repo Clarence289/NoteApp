@@ -11,16 +11,16 @@ const Home = () => {
   const saveNote = async()=>{
     const notesCollectionRef =  collection(db, 'notes');
 
-    const noteData = {
+    const noteAdd = {
         title,
         note,
         timestamp: new Date().toISOString(),
-      }
+      });
 
     try {
       
 
-      const noteRef = await addDoc(notesCollectionRef, noteData);
+      const noteRef = await addDoc(notesCollectionRef, orderData);
 
       
 
