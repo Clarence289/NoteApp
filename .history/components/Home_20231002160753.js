@@ -17,10 +17,10 @@ const Home = () => {
       <TextInput
         style={styles.noteContainer}
         placeholder="Note"
-        
+        value={note}
         onChangeText={(text) => setNote(text)}
       />
-      <TouchableOpacity style={styles.button} >
+      <TouchableOpacity style={styles.button} onPress={saveNote}>
         <Text style={styles.buttonText}>Save</Text>
       </TouchableOpacity>
     </View>

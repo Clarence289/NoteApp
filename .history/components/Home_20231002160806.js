@@ -20,7 +20,7 @@ const Home = () => {
         
         onChangeText={(text) => setNote(text)}
       />
-      <TouchableOpacity style={styles.button} >
+      <TouchableOpacity style={styles.button} onPress={}>
         <Text style={styles.buttonText}>Save</Text>
       </TouchableOpacity>
     </View>
