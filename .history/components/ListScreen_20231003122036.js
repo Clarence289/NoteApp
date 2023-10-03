@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { TextInput, TouchableOpacity, View, Text, StyleSheet } from 'react-native';
 import {saveNote} from '../service/firebaseService'
+import { useNavigation } from '@react-navigation/native';
 
 
-const Home = () => {
+const List = () => {
   const [title, setTitle] = useState('');
   const [note, setNote] = useState('');
 

@@ -1,19 +1,19 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { db } from '../config/firabase';
-import {  addDoc,collection ,getDocs} from 'firebase/firestore';
+import {  addDoc,collection, getDocs } from 'firebase/firestore';
 
 // Function to save a note
 export async function saveNote(title, note) {
   const notesCollectionRef = collection(db, 'notes');
   const currentDate = new Date();
 
-  // Format date  "YYYY/MM/DD" 
-  const formattedDate = `${currentDate.getFullYear()}/${
+  // Format the date as "YYYY-MM-DD" (e.g., "2023-10-03")
+  const formattedDate = `${currentDate.getFullYear()}-${
     currentDate.getMonth() + 1 < 10
       ? '0' + (currentDate.getMonth() + 1)
       : currentDate.getMonth() + 1
-  }/${
+  }-${
     currentDate.getDate() < 10
       ? '0' + currentDate.getDate()
       : currentDate.getDate()
@@ -22,7 +22,7 @@ export async function saveNote(title, note) {
   const noteData = {
     title,
     note,
-    timestamp: formattedDate,
+    timestamp: new Date().toISOString(),
   }
 
   try {
@@ -35,9 +35,6 @@ export async function saveNote(title, note) {
     return false; 
   }
 }
-
-
-
 
 
 //Function to list notes

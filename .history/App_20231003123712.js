@@ -1,12 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
-import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import AddNoteScreen from './components/AddNoteScreen';
 import NoteScreen from './components/ListNote';
 
 const Stack = createStackNavigator();
+
 
 export default function App() {
   return (
@@ -15,9 +15,8 @@ export default function App() {
         <Stack.Screen name="ListScreen" component={NoteScreen} />
         <Stack.Screen name="AddNoteScreen" component={AddNoteScreen} />
       </Stack.Navigator>
-      <StatusBar style="auto" />
     </NavigationContainer>
-  );
+  )
 }
 
 const styles = StyleSheet.create({

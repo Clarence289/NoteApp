@@ -1,11 +1,10 @@
 import { db } from '../config/firabase';
-import { collection, deleteDoc } from 'firebase/firestore';
-
+import { collection, doc, deleteDoc } from 'firebase/firestore';
 
 
 export async function removeNoteById(noteId) {
     const notesCollectionRef = collection(db, 'notes');
-    const noteDocRef = doc(notesCollectionRef, noteId);
+    const noteDocRef = doc(db, 'notes', noteId);
   
     try {
       await deleteDoc(noteDocRef);

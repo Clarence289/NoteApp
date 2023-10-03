@@ -37,9 +37,6 @@ export async function saveNote(title, note) {
 }
 
 
-
-
-
 //Function to list notes
 export async function listNotes(){
   const notesCollectionRef = collection(db, 'notes');

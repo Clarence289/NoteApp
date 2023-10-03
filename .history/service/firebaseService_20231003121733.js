@@ -1,7 +1,5 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
 import { db } from '../config/firabase';
-import {  addDoc,collection ,getDocs} from 'firebase/firestore';
+import {  addDoc,collection, getDocs } from 'firebase/firestore';
 
 // Function to save a note
 export async function saveNote(title, note) {
@@ -35,9 +33,6 @@ export async function saveNote(title, note) {
     return false; 
   }
 }
-
-
-
 
 
 //Function to list notes

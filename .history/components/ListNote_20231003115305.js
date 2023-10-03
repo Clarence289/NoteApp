@@ -1,41 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { View, FlatList,Paragraph, StyleSheet } from 'react-native';
 import { Button, Card, Title } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import { listNotes } from '../service/firebaseService';
-import  { removeNoteById } from '../service/RemoveNote'
+import {list}
 
 
+
+const initialNotes = [
+  { id: '1', title: 'List Note', content: 'Content of Note 1' },
+  { id: '2', title: 'Title', content: 'Note' },
+];
 
 const NoteScreen = () => {
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState(initialNotes);
   const navigation = useNavigation();
+
   const navigateToHome = () => {
-    navigation.navigate('AddNoteScreen');
+    navigation.navigate('Home'); 
   };
 
-  // Remove note
+  
 
-  const RemoveNote = async (noteId) => {
-    const isSuccess = await removeNoteById (noteId);
-
-    if (isSuccess) {
-      // If the note was removed successfully, fetch updated notes
-      fetchNotes();
-      alert('Note removed successfully.');
-    } else {
-      alert('Error removing note.');
-    }
-  };
-
-  // function to fetch notes
-  const fetchNotes = async ()=>{
-    const fetchedNotes = await listNotes();
-    setNotes(fetchedNotes);
-  }
-  useEffect(()=>{
-    fetchNotes();
-  },[]);
   return (
     <View style={styles.container}>
       <FlatList
@@ -45,20 +30,13 @@ const NoteScreen = () => {
           <Card style={styles.card}>
             <Card.Content>
               <Title>{item.title}</Title>
-              <Title>{item.note}</Title>
-              <Title>{item.timestamp}</Title>
+              {/* <Paragraph>{item.content}</Paragraph> */}
             </Card.Content>
-            <Button
-        onPress={() => RemoveNote(item.id)} // Call RemoveNote with the note's ID
-        style={styles.removeButton}
-        labelStyle={styles.buttonLabel}
-      >
-        Remove
-      </Button>
           </Card>
         )}
       />
       <View style={styles.buttonContainer}>
+        {/* <Paragraph>{new Date().toDateString()}</Paragraph> */}
         <Button
           onPress={navigateToHome}
           style={styles.addButton}
@@ -66,11 +44,20 @@ const NoteScreen = () => {
         >
           Add New
         </Button>
-       
+        {notes.length > 0 && (
+          <Button
+            style={styles.removeButton}
+            labelStyle={styles.buttonLabel}
+          
+          >
+            Remove
+          </Button>
+        )}
       </View>
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -99,4 +86,5 @@ const styles = StyleSheet.create({
     color: 'white',
   },
 });
+
 export default NoteScreen;
