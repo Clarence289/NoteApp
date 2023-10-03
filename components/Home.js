@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TextInput, TouchableOpacity, View, Text, StyleSheet } from 'react-native';
-import firebaseService from './firebaseService';
+import firebaseService from '../service/firebaseService';
 
 
 const Home = () => {
