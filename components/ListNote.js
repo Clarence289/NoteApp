@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { View, FlatList,Paragraph, StyleSheet } from 'react-native';
-import { Button, Card, Title } from 'react-native-paper';
+import { View, FlatList, StyleSheet } from 'react-native';
+import { Button, Card, Title, Paragraph } from 'react-native-paper'; // Corrected import statement
 import { useNavigation } from '@react-navigation/native';
-
-
 
 const initialNotes = [
   { id: '1', title: 'List Note', content: 'Content of Note 1' },
@@ -11,34 +9,28 @@ const initialNotes = [
 ];
 
 const NoteScreen = () => {
+  const navigation = useNavigation(); // Added navigation hook
+
+  const navigateToHome = () => {
+    navigation.navigate('Home'); // You can replace 'Home' with your desired screen name
+  };
+
   return (
     <View style={styles.container}>
       <FlatList
-        data={initialNotes} {/* Corrected variable name from 'notes' to 'initialNotes' */}
+        data={initialNotes}
         keyExtractor={(item) => item.id}
-        renderItem={({ item, index }) => ( {/* Added 'index' parameter */}
+        renderItem={({ item, index }) => (
           <Card style={styles.card}>
             <Card.Content>
               <Title>{item.title}</Title>
-              {/* <Paragraph>{item.content}</Paragraph> */}
+              <Paragraph>{item.content}</Paragraph> {/* Added Paragraph component */}
             </Card.Content>
-            {index === initialNotes.length - 1 && ( {/* Corrected variable name from 'notes' to 'initialNotes' */}
-              <View style={styles.buttonContainer}>
-                <Paragraph>{new Date().toDateString()}</Paragraph>
-                <Button
-                  style={styles.addButton}
-                  labelStyle={styles.buttonLabel}
-                >
-                  Add New
-                </Button>
-              </View>
-            )}
+            
           </Card>
         )}
-      </FlatList> {/* Removed extra </View> */}
       />
       <View style={styles.buttonContainer}>
-        {/* <Paragraph>{new Date().toDateString()}</Paragraph> */}
         <Button
           onPress={navigateToHome}
           style={styles.addButton}
@@ -46,11 +38,10 @@ const NoteScreen = () => {
         >
           Add New
         </Button>
-        {notes.length > 0 && (
+        {initialNotes.length > 0 && (
           <Button
             style={styles.removeButton}
             labelStyle={styles.buttonLabel}
-          
           >
             Remove
           </Button>
@@ -80,6 +71,9 @@ const styles = StyleSheet.create({
   },
   addButton: {
     backgroundColor: 'blue',
+  },
+  removeButton: {
+    backgroundColor: 'red',
   },
   buttonLabel: {
     color: 'white',
