@@ -1,7 +1,7 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
-import { db } from "../config/firabase";
-import { addDoc, collection } from "firebase/firestore";
+import { StyleSheet, Text, View } from 'react-native'
+import React from 'react'
+import { db } from '../config/firabase';
+import {  addDoc,collection } from 'firebase/firestore';
 
 // Function to save a note
 export async function saveNote(title, note) {
@@ -20,6 +20,6 @@ export async function saveNote(title, note) {
 
   } catch (error) {
     console.error('Error saving note:', error);
-    return false; 
+    return false; // Return false or an error indicator if needed.
   }
 }
