@@ -50,6 +50,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#47B5FF',
+    borderRadius: 3,
   },
   titleContainer: {
     height: 40,
