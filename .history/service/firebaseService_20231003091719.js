@@ -20,6 +20,6 @@ export async function saveNote(title, note) {
 
   } catch (error) {
     console.error('Error saving note:', error);
-    return false; 
+    return false; // Return false or an error indicator if needed.
   }
 }
