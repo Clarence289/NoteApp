@@ -11,15 +11,15 @@ const NoteScreen = () => {
   return (
     <View style={styles.container}>
       <FlatList
-        data={notes}
+        data={initialNotes} {/* Corrected variable name from 'notes' to 'initialNotes' */}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
+        renderItem={({ item, index }) => ( {/* Added 'index' parameter */}
           <Card style={styles.card}>
             <Card.Content>
               <Title>{item.title}</Title>
               <Paragraph>{item.content}</Paragraph>
             </Card.Content>
-            {index === notes.length - 1 && (
+            {index === initialNotes.length - 1 && ( {/* Corrected variable name from 'notes' to 'initialNotes' */}
               <View style={styles.buttonContainer}>
                 <Paragraph>{new Date().toDateString()}</Paragraph>
                 <Button
@@ -32,7 +32,7 @@ const NoteScreen = () => {
             )}
           </Card>
         )}
-      </View>
+      </FlatList> {/* Removed extra </View> */}
     </View>
   );
 };
@@ -57,9 +57,6 @@ const styles = StyleSheet.create({
   },
   addButton: {
     backgroundColor: 'blue',
-  },
-  removeButton: {
-    backgroundColor: 'red',
   },
   buttonLabel: {
     color: 'white',
