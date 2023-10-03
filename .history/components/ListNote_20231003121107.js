@@ -12,7 +12,7 @@ const NoteScreen = () => {
   const navigation = useNavigation();
 
   const navigateToHome = () => {
-    navigation.navigate('AddNoteScreen'); 
+    navigation.navigate('Home'); 
   };
 
 
@@ -37,7 +37,7 @@ const NoteScreen = () => {
             <Card.Content>
               <Title>{item.title}</Title>
               <Title>{item.note}</Title>
-              <Title>{item.timestamp}</Title>
+              <Title>{item.note}</Title>
             </Card.Content>
           </Card>
         )}

@@ -12,7 +12,7 @@ const NoteScreen = () => {
   const navigation = useNavigation();
 
   const navigateToHome = () => {
-    navigation.navigate('AddNoteScreen'); 
+    navigation.navigate('Home'); 
   };
 
 

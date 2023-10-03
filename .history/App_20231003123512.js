@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import AddNoteScreen from './components/AddNoteScreen';
+import 
 import NoteScreen from './components/ListNote';
 
 const Stack = createStackNavigator();
@@ -13,7 +13,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="ListScreen">
         <Stack.Screen name="ListScreen" component={NoteScreen} />
-        <Stack.Screen name="AddNoteScreen" component={AddNoteScreen} />
+        <Stack.Screen name="Home" component={HomeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   )

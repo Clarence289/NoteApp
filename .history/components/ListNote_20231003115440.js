@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { View, FlatList,Paragraph, StyleSheet } from 'react-native';
 import { Button, Card, Title } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
@@ -6,25 +6,26 @@ import { listNotes } from '../service/firebaseService';
 
 
 
+const initialNotes = [
+  { id: '1', title: 'List Note', content: 'Content of Note 1' },
+  { id: '2', title: 'Title', content: 'Note' },
+];
+
 const NoteScreen = () => {
   const [notes, setNotes] = useState([]);
 
   const navigation = useNavigation();
 
   const navigateToHome = () => {
-    navigation.navigate('AddNoteScreen'); 
+    navigation.navigate('Home'); 
   };
 
 
   // function to fetch notes
   const fetchNotes = async ()=>{
-    const fetchedNotes = await listNotes();
-    setNotes(fetchedNotes);
+    const fetchNotes = await listNotes()
   }
 
-  useEffect(()=>{
-    fetchNotes();
-  },[]);
   
 
   return (
@@ -36,14 +37,13 @@ const NoteScreen = () => {
           <Card style={styles.card}>
             <Card.Content>
               <Title>{item.title}</Title>
-              <Title>{item.note}</Title>
-              <Title>{item.timestamp}</Title>
+              {/* <Paragraph>{item.content}</Paragraph> */}
             </Card.Content>
           </Card>
         )}
       />
       <View style={styles.buttonContainer}>
-      
+        {/* <Paragraph>{new Date().toDateString()}</Paragraph> */}
         <Button
           onPress={navigateToHome}
           style={styles.addButton}

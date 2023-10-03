@@ -13,7 +13,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="ListScreen">
         <Stack.Screen name="ListScreen" component={NoteScreen} />
-        <Stack.Screen name="AddNoteScreen" component={AddNoteScreen} />
+        <Stack.Screen name="AddNote" component={AddNoteScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   )

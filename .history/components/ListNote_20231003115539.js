@@ -6,13 +6,18 @@ import { listNotes } from '../service/firebaseService';
 
 
 
+const initialNotes = [
+  { id: '1', title: 'List Note', content: 'Content of Note 1' },
+  { id: '2', title: 'Title', content: 'Note' },
+];
+
 const NoteScreen = () => {
   const [notes, setNotes] = useState([]);
 
   const navigation = useNavigation();
 
   const navigateToHome = () => {
-    navigation.navigate('AddNoteScreen'); 
+    navigation.navigate('Home'); 
   };
 
 
@@ -36,14 +41,13 @@ const NoteScreen = () => {
           <Card style={styles.card}>
             <Card.Content>
               <Title>{item.title}</Title>
-              <Title>{item.note}</Title>
-              <Title>{item.timestamp}</Title>
+              {/* <Paragraph>{item.content}</Paragraph> */}
             </Card.Content>
           </Card>
         )}
       />
       <View style={styles.buttonContainer}>
-      
+        {/* <Paragraph>{new Date().toDateString()}</Paragraph> */}
         <Button
           onPress={navigateToHome}
           style={styles.addButton}
