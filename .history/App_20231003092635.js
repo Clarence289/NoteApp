@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import ListNote from "./ListNote"
 import Home from './components/Home';
 
 export default function App() {
@@ -10,7 +11,6 @@ export default function App() {
       <StatusBar style="auto" />
       
     </View>
-
   );
 }
 
