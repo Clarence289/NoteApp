@@ -1,38 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
 import { Card, Title, Paragraph, Button } from 'react-native-paper';
 
-const notes = [
+const initialNotes = [
   { id: '1', title: 'List Note', content: 'Content of Note 1' },
   { id: '2', title: 'Title', content: 'Note' },
 ];
 
 const NoteScreen = () => {
+  const [notes, setNotes] = useState(initialNotes);
+
+  const handleRemoveLastNote = () => {
+    if (notes.length > 0) {
+      const updatedNotes = [...notes];
+      updatedNotes.pop(); 
+      setNotes(updatedNotes);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <FlatList
         data={notes}
         keyExtractor={(item) => item.id}
-        renderItem={({ item, index }) => (
+        renderItem={({ item }) => (
           <Card style={styles.card}>
             <Card.Content>
               <Title>{item.title}</Title>
               <Paragraph>{item.content}</Paragraph>
             </Card.Content>
-            {index === notes.length - 1 && (
-              <View style={styles.buttonContainer}>
-                <Paragraph>{new Date().toDateString()}</Paragraph>
-                <Button
-                  style={styles.addButton}
-                  labelStyle={styles.buttonLabel}
-                >
-                  Add New
-                </Button>
-              </View>
-            )}
           </Card>
         )}
       />
+      <View style={styles.buttonContainer}>
+        <Paragraph>{new Date().toDateString()}</Paragraph>
+        <Button
+          style={styles.addButton}
+          labelStyle={styles.buttonLabel}
+        >
+          Add New
+        </Button>
+        {notes.length > 0 && (
+          <Button
+            style={styles.removeButton}
+            labelStyle={styles.buttonLabel}
+            onPress={handleRemoveLastNote}
+          >
+            Remove
+          </Button>
+        )}
+      </View>
     </View>
   );
 };
@@ -45,10 +62,9 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   card: {
-    width: '80%', 
-    height: 250, 
+    width: '90%',
     marginBottom: 16,
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   buttonContainer: {
     marginTop: 12,
@@ -59,8 +75,11 @@ const styles = StyleSheet.create({
   addButton: {
     backgroundColor: 'blue',
   },
+  removeButton: {
+    backgroundColor: 'red',
+  },
   buttonLabel: {
-    color: 'white', 
+    color: 'white',
   },
 });
 
