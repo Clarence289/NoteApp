@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { View, FlatList, StyleSheet } from 'react-native';
-import { Card, Title, Paragraph, Button } from 'react-native-paper';
+import { View, FlatList,Paragraph, StyleSheet } from 'react-native';
+import { Button, Card, Title } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
+
+
 
 const initialNotes = [
   { id: '1', title: 'List Note', content: 'Content of Note 1' },
@@ -9,14 +12,13 @@ const initialNotes = [
 
 const NoteScreen = () => {
   const [notes, setNotes] = useState(initialNotes);
+  const navigation = useNavigation();
 
-  const handleRemoveLastNote = () => {
-    if (notes.length > 0) {
-      const updatedNotes = [...notes];
-      updatedNotes.pop(); 
-      setNotes(updatedNotes);
-    }
+  const navigateToHome = () => {
+    navigation.navigate('Home'); 
   };
+
+  
 
   return (
     <View style={styles.container}>
@@ -27,14 +29,15 @@ const NoteScreen = () => {
           <Card style={styles.card}>
             <Card.Content>
               <Title>{item.title}</Title>
-              <Paragraph>{item.content}</Paragraph>
+              {/* <Paragraph>{item.content}</Paragraph> */}
             </Card.Content>
           </Card>
         )}
       />
       <View style={styles.buttonContainer}>
-        <Paragraph>{new Date().toDateString()}</Paragraph>
+        {/* <Paragraph>{new Date().toDateString()}</Paragraph> */}
         <Button
+          onPress={navigateToHome}
           style={styles.addButton}
           labelStyle={styles.buttonLabel}
         >
@@ -44,7 +47,7 @@ const NoteScreen = () => {
           <Button
             style={styles.removeButton}
             labelStyle={styles.buttonLabel}
-            onPress={handleRemoveLastNote}
+          
           >
             Remove
           </Button>

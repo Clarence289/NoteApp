@@ -1,22 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-<<<<<<< HEAD
-import ListNote from "./ListNote"
-=======
-import Home from './components/Home';
->>>>>>> 34a1fb91a134314b9c91b2e918fb05ef98bfd6b3
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import HomeScreen from './components/Home';
+import NoteScreen from './components/ListNote';
+
+const Stack = createStackNavigator();
+
 
 export default function App() {
   return (
-
-    <View style={styles.container}>
-<<<<<<< HEAD
-=======
-      <Home/>
->>>>>>> 34a1fb91a134314b9c91b2e918fb05ef98bfd6b3
-      <StatusBar style="auto" />
-      <ListNote/>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="ListScreen">
+        <Stack.Screen name="ListScreen" component={NoteScreen} />
+        <Stack.Screen name="Home" component={HomeScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
