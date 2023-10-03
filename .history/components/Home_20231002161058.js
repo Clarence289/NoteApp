@@ -1,45 +1,31 @@
 import React, { useState } from 'react';
 import { TextInput, TouchableOpacity, View, Text, StyleSheet } from 'react-native';
-import {saveNote} from '../service/firebaseService'
+import firebaseService from './firebaseService';
 
 
 const Home = () => {
   const [title, setTitle] = useState('');
   const [note, setNote] = useState('');
 
-  // function to save 
-  const handleSaveNote = async ()=>{
-    const saved = await saveNote(title, note);
-
-    if(saved){
-      setNote('');
-      setTitle('');
-
-      alert('Note saved successfully.');
-    } else{
-      alert('Error saving note');
-    }
-  }
-
   return (
     <View style={styles.container}>
-    <Text>Adding Note Screen</Text>
-    <TextInput
-      style={styles.titleContainer}
-      placeholder="Title"
-      value={title}
-      onChangeText={(text) => setTitle(text)}
-    />
-    <TextInput
-      style={styles.noteContainer}
-      placeholder="Note"
-      value={note}
-      onChangeText={(text) => setNote(text)}
-    />
-    <TouchableOpacity style={styles.button} onPress={handleSaveNote}>
-      <Text style={styles.buttonText}>Save</Text>
-    </TouchableOpacity>
-  </View>
+      <Text>Adding Note Screen</Text>
+      <TextInput
+        style={styles.titleContainer}
+        placeholder="Title"
+        
+        onChangeText={(text) => setTitle(text)}
+      />
+      <TextInput
+        style={styles.noteContainer}
+        placeholder="Note"
+        
+        onChangeText={(text) => setNote(text)}
+      />
+      <TouchableOpacity style={styles.button} >
+        <Text style={styles.buttonText}>Save</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 

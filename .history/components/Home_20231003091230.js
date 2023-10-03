@@ -9,16 +9,7 @@ const Home = () => {
 
   // function to save 
   const handleSaveNote = async ()=>{
-    const saved = await saveNote(title, note);
-
-    if(saved){
-      setNote('');
-      setTitle('');
-
-      alert('Note saved successfully.');
-    } else{
-      alert('Error saving note');
-    }
+    const saved = await saveNote(title, note)
   }
 
   return (
@@ -36,7 +27,7 @@ const Home = () => {
       value={note}
       onChangeText={(text) => setNote(text)}
     />
-    <TouchableOpacity style={styles.button} onPress={handleSaveNote}>
+    <TouchableOpacity style={styles.button} onPress={() => firebaseService.saveNote(title, note)}>
       <Text style={styles.buttonText}>Save</Text>
     </TouchableOpacity>
   </View>
