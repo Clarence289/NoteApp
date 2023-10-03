@@ -8,6 +8,7 @@ const notes = [
 ];
 
 const NoteScreen = () => {
+  
   return (
     <View style={styles.container}>
       <FlatList
@@ -22,6 +23,14 @@ const NoteScreen = () => {
             {index === notes.length - 1 && (
               <View style={styles.buttonContainer}>
                 <Paragraph>{new Date().toDateString()}</Paragraph>
+
+                <Button
+                style={styles.deleteButton}
+                labelStyle={styles.buttonLabel}
+                onPress={() => deleteNoteById(item.id)}
+              >
+                Delete
+              </Button>
                 <Button
                   style={styles.addButton}
                   labelStyle={styles.buttonLabel}
