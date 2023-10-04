@@ -52,7 +52,9 @@ const NoteScreen = () => {
   );
   
   return (
+    
     <View style={styles.container}>
+    <View>
       <FlatList
         style={styles.cardContainer}
         data={notes}
@@ -83,6 +85,8 @@ const NoteScreen = () => {
             </Card>
         )}
       />
+    </View>
+      
       <View style={styles.floatBtn}>
       {/* Changed 'Button' to 'Pressable' and a floating btn*/}
         <Pressable
@@ -151,11 +155,11 @@ const styles = StyleSheet.create({
   note: {
     color: "#242424",
     fontFamily: "Sans-serif",
-    fontSize: 10,
+    fontSize: 11,
     fontStyle: "normal",
     overflow: "hidden",
     height: 50,
-    lineHeight: 16,
+    lineHeight: 15,
   },
   date: {
     color: "#242424cc",
