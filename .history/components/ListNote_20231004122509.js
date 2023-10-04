@@ -44,7 +44,6 @@ const NoteScreen = () => {
       fetchNotes();
     }, [])
   );
-  
   return (
     <View style={styles.container}>
       <FlatList

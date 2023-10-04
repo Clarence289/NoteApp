@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
   errorText: {
     color: 'red',
     marginBottom: 10,
-    fontSize: 16,
+    fontSize: 20,
   },
 });
 

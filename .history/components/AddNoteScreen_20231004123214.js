@@ -62,7 +62,6 @@ const AddNoteScreen = () => {
    value={note}
    onChangeText={(text) => setNote(text)}
  />
- {noteError ? <Text style={styles.errorText}>{noteError}</Text> : null}
  <TouchableOpacity style={styles.button} onPress={handleSaveNote}>
    <Text style={styles.buttonText}>Save</Text>
    <MaterialIcons style={styles.saveIcon} name="save-alt" size={24} color="white" />
@@ -129,7 +128,7 @@ const styles = StyleSheet.create({
   errorText: {
     color: 'red',
     marginBottom: 10,
-    fontSize: 16,
+    fontSize: 20,
   },
 });
 
