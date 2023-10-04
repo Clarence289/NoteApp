@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, FlatList, Paragraph, StyleSheet } from 'react-native';
 import { Button, Card, Title } from 'react-native-paper';
-import { useNavigation , useFocusEffect} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { listNotes } from '../service/firebaseService';
 import { removeNoteById } from '../service/RemoveNote'
 import { MaterialIcons } from '@expo/vector-icons'
@@ -33,21 +33,9 @@ const NoteScreen = () => {
     const fetchedNotes = await listNotes();
     setNotes(fetchedNotes);
   }
-
   useEffect(() => {
     fetchNotes();
   }, []);
-
-
-  // Use the useFocusEffect hook to fetch notes when the screen gains focus
-  useFocusEffect(
-    React.useCallback(() => {
-      fetchNotes();
-    }, [])
-  );
-
-
-
   return (
     <View style={styles.container}>
       <FlatList

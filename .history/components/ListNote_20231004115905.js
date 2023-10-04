@@ -33,21 +33,10 @@ const NoteScreen = () => {
     const fetchedNotes = await listNotes();
     setNotes(fetchedNotes);
   }
-
+  
   useEffect(() => {
     fetchNotes();
   }, []);
-
-
-  // Use the useFocusEffect hook to fetch notes when the screen gains focus
-  useFocusEffect(
-    React.useCallback(() => {
-      fetchNotes();
-    }, [])
-  );
-
-
-
   return (
     <View style={styles.container}>
       <FlatList
