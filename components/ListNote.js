@@ -82,9 +82,7 @@ const styles = StyleSheet.create({
     borderRadius: 3,
   },
   card: {
-    // width: '90%',
-    // marginBottom: 16,
-    // alignSelf: 'center',
+ 
     width: 155.507,
     height: 160,
     borderWidth: 1,
@@ -140,11 +138,6 @@ const styles = StyleSheet.create({
     bottom: 50,
     left: 100
   },
-  // delete:{
-  //   width: 25.563,
-  //   height: 24,
-  //   flexShrink: 0,
-  // },
   buttonLabel: {
     color: 'white',
     justifyContent: 'center',
