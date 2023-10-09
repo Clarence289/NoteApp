@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import { TextInput, TouchableOpacity, View, Text, StyleSheet } from 'react-native';
 import {saveNote} from '../service/firebaseService'
+import Loader from './Loader';
 
 
 const Home = () => {
   const [title, setTitle] = useState('');
   const [note, setNote] = useState('');
 
+
   // function to save 
   const handleSaveNote = async ()=>{
+
     const saved = await saveNote(title, note);
+  
 
     if(saved){
       setNote('');
@@ -40,6 +44,7 @@ const Home = () => {
     <TouchableOpacity style={styles.button} onPress={handleSaveNote}>
       <Text style={styles.buttonText}>Save</Text>
     </TouchableOpacity>
+  
   </View>
   );
 };

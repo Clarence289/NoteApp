@@ -1,17 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { View, FlatList, Paragraph, StyleSheet } from 'react-native';
-import { Button, Card, Title } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
-import { listNotes } from '../service/firebaseService';
-import { removeNoteById } from '../service/RemoveNote'
-import { MaterialIcons } from '@expo/vector-icons'
-
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  FlatList,
+  Paragraph,
+  StyleSheet,
+  Pressable,
+  Text,
+} from "react-native";
+import { Button, Card, Title } from "react-native-paper";
+import { useNavigation , useFocusEffect} from "@react-navigation/native";
+import { listNotes } from "../service/firebaseService";
+import { removeNoteById } from "../service/RemoveNote";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const NoteScreen = () => {
   const [notes, setNotes] = useState([]);
   const navigation = useNavigation();
   const navigateToHome = () => {
-    navigation.navigate('AddNoteScreen');
+    navigation.navigate("AddNoteScreen");
   };
 
   // Remove note
@@ -22,9 +28,9 @@ const NoteScreen = () => {
     if (isSuccess) {
       // If the note was removed successfully, fetch updated notes
       fetchNotes();
-      alert('Note removed successfully.');
+      alert("Note removed successfully.");
     } else {
-      alert('Error removing note.');
+      alert("Error removing note.");
     }
   };
 
@@ -32,42 +38,69 @@ const NoteScreen = () => {
   const fetchNotes = async () => {
     const fetchedNotes = await listNotes();
     setNotes(fetchedNotes);
-  }
+  };
   useEffect(() => {
     fetchNotes();
   }, []);
+
+
+  // Use the useFocusEffect hook to fetch notes when the screen gains focus
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchNotes();
+    }, [])
+  );
+  
   return (
+    
     <View style={styles.container}>
+    <View>
       <FlatList
+        style={styles.cardContainer}
         data={notes}
-        numColumns={2}
+        numColumns={1}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <Card style={styles.card}>
-            <Card.Content>
-              <Title style={styles.title}>{item.title}</Title>
-              <Title style={styles.note}>{item.note}</Title>
-              <Title style={styles.date}>{item.timestamp}</Title>
-            </Card.Content>
-            <Button
-              onPress={() => RemoveNote(item.id)} // Call RemoveNote with the note's ID
-              style={styles.deleteIcon}
-            >
-              <MaterialIcons name="delete" size={24} color="red" />
-            </Button>
-          </Card>
+            <Card style={styles.card}>
+              <Card.Content>
+                <View style={styles.contents}>
+                  <Text>
+                    <Title style={styles.title}>{item.title}</Title>
+                  </Text>
+                  {/* note text to have elipsis when max view of text is reached (number of lines) */}
+                  <Text numberOfLines={3} ellipsizeMode="tail">
+                    <Title style={styles.note}>{item.note}</Title>
+                  </Text>
+                </View>
+              </Card.Content>
+              <View style={styles.buttonContainer}>
+                <Title style={styles.date}>{item.timestamp}</Title>
+                <Pressable
+                  onPress={() => RemoveNote(item.id)} // Call RemoveNote with the note's ID
+                  style={styles.deleteIcon}
+                >
+                  <MaterialIcons name="delete" size={24} color="#ff2020" />
+                </Pressable>
+              </View>
+            </Card>
         )}
       />
-      <View style={styles.buttonContainer}>
-        <Button
+    </View>
+      
+      <View style={styles.floatBtn}>
+      {/* Changed 'Button' to 'Pressable' and a floating btn*/}
+        <Pressable
           onPress={navigateToHome}
           style={styles.addButton}
           labelStyle={styles.buttonLabel}
         >
-          Add New
-          <MaterialIcons style={styles.addIcon} name="add-circle" size={24} color="black" />
-        </Button>
-
+          <MaterialIcons
+            style={styles.addIcon}
+            name="add-circle"
+            size={20}
+            color="black"
+          />
+        </Pressable>
       </View>
     </View>
   );
@@ -75,86 +108,130 @@ const NoteScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 16,
-    backgroundColor: '#47B5FF',
-    borderRadius: 3,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#f2f2f2",
+    
+  },
+  cardContainer: {
+    flex: 1,
+    flexDirection: "column",
+    // paddingHorizontal: 4,
+    height: "80%",
+    width: "100%",
+    
   },
   card: {
- 
-    width: 155.507,
-    height: 160,
+    flex: 1,
     borderWidth: 1,
-    borderColor: '#47B5FF',
-    borderStyle: 'solid',
-    backgroundColor: '#FFF',
-    borderRadius: 5
+    borderColor: "#ececec",
+    borderStyle: "solid",
+    backgroundColor: "#FFF",
+    borderRadius: 8,
+    height: "24%",
+    width: "90%",
+    // marginHorizontal: 14,
+    marginVertical: 4,
+    justifyContent: "center",
+    // alignItems: "center",
+  },
+  contents: {
+    // backgroundColor: "#ff44ff",
+    flexDirection: "column",
+    flexWrap: "no-wrap", //we dont wrap paragraphs of rows of contents
+    flexShrink: 1,
+    overflow: "hidden",
   },
   title: {
-    color: '#256D85',
-    fontFamily: 'Moul',
-    fontSize: 20,
-    fontStyle: 'normal',
-    fontWeight: 'bold',
-    lineHeight: 'normal',
-    textAlign: 'center'
+    color: "#242424",
+    fontFamily: "Sans-serif",
+    fontSize: 16,
+    fontStyle: "normal",
+    fontWeight: "bold",
+    letterSpacing: 0.5,
+    textAlign: "center",
+    marginBottom: 12,
   },
   note: {
-    fontSize: 16,
-
+    color: "#242424",
+    fontFamily: "Sans-serif",
+    fontSize: 11,
+    fontStyle: "normal",
+    overflow: "hidden",
+    height: 50,
+    lineHeight: 15,
   },
   date: {
-    color: '#06283D',
-    fontFamily: 'Moul',
-    fontSize: '12px',
-    fontStyle: 'normal',
-    fontWeight: 400,
-    lineHeight: 'normal',
-    left: 70,
-    top: 60
+    color: "#242424cc",
+    fontFamily: "Sans-serif",
+    fontSize: 10,
+    fontStyle: "normal",
+    letterSpacing: 0.5,
+    // textAlign: 'right',
+    // right: 0,
+    // top:100,
+
+    left: 0,
+    marginRight: 200,
+
+    flex: 0.5,
   },
+
   buttonContainer: {
+    flexDirection: "row",
+    gap: 12,
+    paddingVertical: 4,
+    paddingHorizontal: 16,
     marginTop: 12,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    
   },
   addButton: {
-    width: 159.767,
-    height: 50,
+    width: 42,
+    height: 42,
     flexShrink: 0,
-    borderWidth: 1,
-    borderColor: '#000',
-    borderStyle: 'solid',
-    boxShadow: '0px 4px 200px 0px rgba(10, 223, 252, 0.50)',
-    borderRadius: 10,
-    backgroundColor: '#086ECC'
-  },
-  deleteIcon: {
-    width: 25.563,
-    height: 24,
-    flexShrink: 0,
-    bottom: 50,
-    left: 100
-  },
-  buttonLabel: {
-    color: 'white',
-    justifyContent: 'center',
-    alignItems: 'center',
-    color: '#FFF', 
-    fontFamily: 'Inter',
-    fontSize: '20px',
-    fontStyle: 'normal',
-    fontWeight: 700,
-    lineHeight: 'normal',
+    borderWidth: 2,
+    borderColor: "#000",
+    borderStyle: "solid",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 2,
+    // boxShadow: "0px 4px 200px 0px rgba(10, 223, 252, 0.50)",
+    borderRadius: "50%",
+    backgroundColor: "#fae04e",
   },
   addIcon: {
-    width: '34.084px',
-    height: ' 32px',
-    flexShrink: 0,
-    marginLeft: 20,
-  
+    width: "auto",
+    height: "auto",
   },
+
+  floatBtn: {
+    position: "absolute",
+    // right: 0,
+    // marginRight: 34,
+    bottom: 40,
+  },
+
+  deleteIcon: {
+    right: 0,
+    marginLeft: 36,
+    flex: 0.5,
+  },
+  // delete:{
+  //   width: 25.563,
+  //   height: 24,
+  //   flexShrink: 0,
+  // },
+  buttonLabel: {
+    color: "white",
+    justifyContent: "center",
+    alignItems: "center",
+    color: "#FFF",
+    fontFamily: "Inter",
+    fontSize: "20px",
+    fontStyle: "normal",
+    fontWeight: 700,
+    lineHeight: "normal",
+  },
+  
 });
 export default NoteScreen;
