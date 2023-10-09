@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff2ab",
     alignItems: "center",
     justifyContent: "center",
+    
   },
   header: {
     color: "#000",
@@ -118,13 +119,15 @@ const styles = StyleSheet.create({
     fontStyle: "normal",
     flexWrap: "wrap",
     overflow: "scroll",
-    maxHeight: 40,
-    lineHeight: 16,
+    width: "auto",
+    height: "100%",
+    verticalAlign: "top",
+    
     // flex: .5,
     flexWrap: "wrap",
   },
   noteContainer: {
-    flex: .5,
+    flex: "flex-start",
     flexWrap: "wrap",
     height: 120,
     width: 280,
@@ -137,6 +140,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     letterSpacing: 0.5,
     worddWrap: "break-word",
+    lineHeight: 16,
   },
   button: {
     flexDirection: "row",
@@ -177,7 +181,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#5d5a46",
   },
   errorText: {
-    color: "#ff3939",
+    color: "#e72323",
     marginBottom: 10,
     fontSize: 16,
   },

@@ -8,7 +8,7 @@ import {
   Text,
 } from "react-native";
 import { Button, Card, Title } from "react-native-paper";
-import { useNavigation , useFocusEffect} from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { listNotes } from "../service/firebaseService";
 import { removeNoteById } from "../service/RemoveNote";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -36,13 +36,14 @@ const NoteScreen = () => {
 
   // function to fetch notes
   const fetchNotes = async () => {
+    console.log("Loading...");      //alert user when loading notes
     const fetchedNotes = await listNotes();
     setNotes(fetchedNotes);
+    console.log("Complete");    //remove loading icon after notes are fetched
   };
   useEffect(() => {
     fetchNotes();
   }, []);
-
 
   // Use the useFocusEffect hook to fetch notes when the screen gains focus
   useFocusEffect(
@@ -50,17 +51,16 @@ const NoteScreen = () => {
       fetchNotes();
     }, [])
   );
-  
+
   return (
-    
     <View style={styles.container}>
-    <View>
-      <FlatList
-        style={styles.cardContainer}
-        data={notes}
-        numColumns={1}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
+      <View>
+        <FlatList
+          style={styles.cardContainer}
+          data={notes}
+          numColumns={1}      //make this a changable variable to allow user to choos a display (list or gid)
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
             <Card style={styles.card}>
               <Card.Content>
                 <View style={styles.contents}>
@@ -83,12 +83,12 @@ const NoteScreen = () => {
                 </Pressable>
               </View>
             </Card>
-        )}
-      />
-    </View>
-      
+          )}
+        />
+      </View>
+
       <View style={styles.floatBtn}>
-      {/* Changed 'Button' to 'Pressable' and a floating btn*/}
+        {/* Changed 'Button' to 'Pressable' and a floating btn*/}
         <Pressable
           onPress={navigateToHome}
           style={styles.addButton}
@@ -97,8 +97,8 @@ const NoteScreen = () => {
           <MaterialIcons
             style={styles.addIcon}
             name="add-circle"
-            size={20}
-            color="black"
+            size={42}
+            color="yellow"
           />
         </Pressable>
       </View>
@@ -111,7 +111,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#f2f2f2",
-    
   },
   cardContainer: {
     flex: 1,
@@ -119,7 +118,6 @@ const styles = StyleSheet.create({
     // paddingHorizontal: 4,
     height: "80%",
     width: "100%",
-    
   },
   card: {
     flex: 1,
@@ -197,7 +195,7 @@ const styles = StyleSheet.create({
     padding: 2,
     // boxShadow: "0px 4px 200px 0px rgba(10, 223, 252, 0.50)",
     borderRadius: "50%",
-    backgroundColor: "#fae04e",
+    backgroundColor: "#222222",
   },
   addIcon: {
     width: "auto",
@@ -205,15 +203,15 @@ const styles = StyleSheet.create({
   },
 
   floatBtn: {
-    position: "absolute",
-    // right: 0,
-    // marginRight: 34,
+   // make it fixed/achord to one position (bottom)
+    position: "fixed",
     bottom: 40,
+    
   },
 
   deleteIcon: {
-    right: 0,
-    marginLeft: 36,
+    right: 24,
+    marginLeft: 0,
     flex: 0.5,
   },
   // delete:{
@@ -232,6 +230,5 @@ const styles = StyleSheet.create({
     fontWeight: 700,
     lineHeight: "normal",
   },
-  
 });
 export default NoteScreen;
